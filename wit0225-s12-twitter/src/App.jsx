@@ -9,6 +9,7 @@ import Feed from "./pages/Feed";
 function App() {
   return (
     <>
+      <h1 class="text-3xl font-bold underline text-red-500">Hello world!</h1>
       <Switch>
         <Route exact path="/">
           <Redirect to="/login" />
