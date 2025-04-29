@@ -6,15 +6,17 @@ import { Link, useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { toast } from "react-toastify";
 import { API } from "../api";
 
-function Login() {
+function Login({ setLoggedUser }) {
+  const user = JSON.parse(localStorage.getItem("user"));
+
   const {
     register,
     handleSubmit,
     formState: { isValid, errors },
   } = useForm({
     defaultValues: {
-      email: "emre@wit.com.tr",
-      password: "1234QWer**",
+      email: user ? user.email : "",
+      password: "",
     },
     mode: "onChange",
   });
@@ -24,6 +26,7 @@ function Login() {
   function submitFn(formData) {
     API.post("/users", formData)
       .then((res) => {
+        setLoggedUser(res.data);
         toast.success(`Merhaba ${res.data.email}, tekrar hoş geldin...`);
         history.push("/feed");
       })
@@ -51,6 +54,7 @@ function Login() {
           })}
           className="p-4 rounded border border-slate-200"
           placeholder="Phone number, email address"
+          autoFocus={user ? false : true}
         />
         {errors.email && (
           <p className="text-red-900 bg-red-200 border border-red-900 rounded p-4">
@@ -59,13 +63,18 @@ function Login() {
         )}
         <input
           {...register("password", {
-            required: true,
+            required: {
+              value: true,
+              message: "Bu alanı boş bırakmayınız!..",
+            },
             validate: function (value) {
               return value.length >= 8 || "Strong password giriniz!..";
             },
           })}
           className="p-4 rounded border border-slate-200"
           placeholder="Password"
+          type="password"
+          autoFocus={user ? true : false}
         />
         {errors.password && (
           <p className="text-red-900 bg-red-200 border border-red-900 rounded p-4">

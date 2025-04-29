@@ -1,7 +1,7 @@
 import React from "react";
 
-function Feed() {
-  return <div>Feed</div>;
+function Feed({ loggedUser }) {
+  return <div>Feed - {loggedUser.email}</div>;
 }
 
 export default Feed;

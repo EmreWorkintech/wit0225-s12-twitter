@@ -5,8 +5,11 @@ import {
 } from "react-router-dom/cjs/react-router-dom.min";
 import Login from "./pages/Login";
 import Feed from "./pages/Feed";
+import { useLocalStorage } from "./hooks/useLocalStorage";
 
 function App() {
+  const [loggedUser, setLoggedUser] = useLocalStorage("user", null);
+
   return (
     <>
       <Switch>
@@ -14,10 +17,10 @@ function App() {
           <Redirect to="/login" />
         </Route>
         <Route path="/login">
-          <Login />
+          <Login setLoggedUser={setLoggedUser} />
         </Route>
         <Route path="/feed">
-          <Feed />
+          <Feed loggedUser={loggedUser} />
         </Route>
       </Switch>
     </>
