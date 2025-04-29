@@ -33,7 +33,7 @@ function Login() {
   }
 
   return (
-    <div className="w-1/4 mx-auto">
+    <div className="w-1/4 min-w-80 mx-auto">
       <FontAwesomeIcon
         icon={faTwitter}
         className="text-blue-400 text-5xl mt-12 mb-8"
@@ -74,7 +74,7 @@ function Login() {
         )}
         <button
           disabled={!isValid}
-          className="cursor-pointer bg-blue-400 rounded-full p-4 text-white text-center disabled:bg-slate-200 disabled:text-slate-500"
+          className="cursor-pointer hover:bg-blue-500 bg-blue-400 rounded-full p-4 text-white text-center disabled:bg-slate-200 disabled:text-slate-500"
         >
           Log In
         </button>
