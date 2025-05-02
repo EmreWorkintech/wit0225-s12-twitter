@@ -7,7 +7,7 @@ import {
 } from "../actions/tweetActions";
 
 const initialState = {
-  tweets: [{ message: "1" }, { message: "2" }],
+  tweets: [],
   loading: false,
   error: "",
 };
