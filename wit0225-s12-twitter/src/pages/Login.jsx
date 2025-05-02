@@ -1,13 +1,14 @@
 import { faTwitter } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { toast } from "react-toastify";
 import { API } from "../api";
+import { userContext } from "../contexts/UserContext";
 
-function Login({ setLoggedUser }) {
-  const user = JSON.parse(localStorage.getItem("user"));
+function Login() {
+  const { login, user } = useContext(userContext);
 
   const {
     register,
@@ -24,9 +25,9 @@ function Login({ setLoggedUser }) {
   const history = useHistory();
 
   function submitFn(formData) {
-    API.post("/users", formData)
+    API.post("/login", formData)
       .then((res) => {
-        setLoggedUser(res.data);
+        login(res.data);
         toast.success(`Merhaba ${res.data.email}, tekrar hoş geldin...`);
         history.push("/feed");
       })

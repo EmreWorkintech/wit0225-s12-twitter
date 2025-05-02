@@ -7,17 +7,23 @@ function FeedItem({ tweet }) {
   return (
     <div className="w-full p-8 border-b border-b-slate-100 flex gap-2">
       <div className="w-15 p-1">
-        <img className="w-full rounded-full" src="https://picsum.photos/100" />
+        <img className="w-full rounded-full" src={tweet.avatar} />
       </div>
       <div className="flex-grow">
         <p className="fonr-bold">
-          EmreSahiner{" "}
+          {tweet.userName}{" "}
           <span className="font-normal text-slate-400 text-md">
-            @emreSahiner - 25min ago
+            @{tweet.userName} - 25min ago
           </span>{" "}
         </p>
-        <p>lorem ipsum sit o dolor color jkdshfkjdhfk ajdhfkjdhf</p>
-        <Analytics />
+        <p>{tweet.message}</p>
+        <Analytics
+          analytics={{
+            like_count: tweet.like_count,
+            comment_count: tweet.comment_count,
+            retweet_count: tweet.retweet_count,
+          }}
+        />
       </div>
       <div className="w-15 p-1 text-right">
         <FontAwesomeIcon icon={faEllipsis} />
