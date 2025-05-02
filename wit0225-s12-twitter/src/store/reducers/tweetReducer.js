@@ -1,7 +1,9 @@
 import {
   ADD_TWEET_ERROR,
-  ADD_TWEET_LOADING,
+  TWEET_LOADING,
   ADD_TWEET_SUCCESS,
+  GET_TWEETS_SUCCESS,
+  GET_TWEETS_ERROR,
 } from "../actions/tweetActions";
 
 const initialState = {
@@ -12,7 +14,7 @@ const initialState = {
 
 export default function tweetReducer(state = initialState, action) {
   switch (action.type) {
-    case ADD_TWEET_LOADING:
+    case TWEET_LOADING:
       return {
         ...state,
         loading: true,
@@ -27,6 +29,19 @@ export default function tweetReducer(state = initialState, action) {
         error: "",
       };
     case ADD_TWEET_ERROR:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+    case GET_TWEETS_SUCCESS:
+      return {
+        ...state,
+        tweets: action.payload,
+        loading: false,
+        error: "",
+      };
+    case GET_TWEETS_ERROR:
       return {
         ...state,
         loading: false,
