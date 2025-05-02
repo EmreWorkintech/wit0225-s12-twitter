@@ -1,9 +1,11 @@
 import axios from "axios";
 
 function createAxiosInstance() {
+  const token = localStorage.getItem("token");
+
   return axios.create({
     baseURL: import.meta.env.VITE_API_ADDRESS,
-    headers: { "x-api-key": "reqres-free-v1" },
+    headers: { Authorization: `Bearer ${token}` },
   });
 }
 
