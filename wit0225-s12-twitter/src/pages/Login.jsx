@@ -75,6 +75,7 @@ function Login() {
           className="p-4 rounded border border-slate-200"
           placeholder="Password"
           type="password"
+          data-testid="input-pass"
           autoFocus={user ? true : false}
         />
         {errors.password && (
