@@ -1,20 +1,21 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
-import { addTweet } from "../store/actions/tweetActions";
+import { useCreateTweet } from "../services/mutations";
 
 function NewTweetForm() {
-  const { register, handleSubmit } = useForm();
-  const isLoading = useSelector((store) => store.tweet.loading);
-  const dispatch = useDispatch();
-
+  const { register, reset, handleSubmit } = useForm();
+  const mutation = useCreateTweet();
   function submitFn(formData) {
-    dispatch(addTweet(formData));
+    mutation.mutate(formData);
+    reset();
   }
+
   return (
     <form onSubmit={handleSubmit(submitFn)}>
       <input {...register("message")} />
-      <button>{isLoading ? <span className="loader"></span> : "Tweet"}</button>
+      <button>
+        {mutation.isLoading ? <span className="loader"></span> : "Tweet"}
+      </button>
     </form>
   );
 }

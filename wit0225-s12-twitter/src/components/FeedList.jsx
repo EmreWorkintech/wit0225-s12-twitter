@@ -1,15 +1,11 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useTweets } from "../services/queries";
 import FeedItem from "./FeedItem";
-import { getTweets } from "../store/actions/tweetActions";
 
 function FeedList() {
-  const tweets = useSelector((store) => store.tweet.tweets);
-  const dispatch = useDispatch();
+  const { data: tweets, error, isLoading } = useTweets();
 
-  useEffect(() => {
-    dispatch(getTweets());
-  }, []);
+  if (isLoading) return <p>Loading...</p>;
+  if (error) return <p>{error.message}</p>;
 
   return (
     <div>
